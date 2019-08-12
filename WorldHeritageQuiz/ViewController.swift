@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // 結果を表示する画面に渡す情報群
+    // 総問題数
+    var questionsCount: Int = 0
+    // 正解、不正解を判断する配列(true = 正解、false = 不正解)
+    var correctOrIncorrect: [Bool] = []
+    
     // 問1~3までのview
     @IBOutlet var questions: [UIView]!
     
@@ -23,6 +29,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 総問題数を格納する
+        questionsCount = questions.count
     }
     
     // =====================================================
@@ -31,10 +39,13 @@ class ViewController: UIViewController {
         
         // 回答があっているか確認
         if playerAnswer == answers[questionNumber - 1] {
-            
+            // 配列に不正解(true)を入れる
+            correctOrIncorrect.append(true)
+            // アラートを表示
             showAlertWhenCorrect(title: "正解です！", message: "次の問題へ進みます。")
             
         } else {
+            // アラートを表示
             showAlertWhenIncorrect(title: "不正解です...", message: "もう一度挑戦しますか？")
         }
     }
@@ -49,9 +60,11 @@ class ViewController: UIViewController {
         // アラートのアクション（もう一度の場合）
         let no = UIAlertAction(title: "いいえ", style: .default, handler: {(action: UIAlertAction!) in
             
+            
+            // 配列に不正解(false)を入れる
+            self.correctOrIncorrect.append(false)
             // 次の問題へ
             self.nextQuestion()
-            
         })
         // 作成したalertに閉じるボタンを追加
         alert.addAction(yes)
@@ -60,6 +73,7 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // =====================================================
     // アラートを表示させる関数(正解時)
     func showAlertWhenCorrect(title: String?, message: String) {
         // アラートの作成
@@ -102,6 +116,19 @@ class ViewController: UIViewController {
         } else {
             // 結果(tableView)に遷移
             performSegue(withIdentifier: "toResult", sender: nil)
+        }
+    }
+    
+    // =====================================================
+    // 遷移前に遷移先に情報を渡す関数
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segueの識別子の確認
+        if segue.identifier == "toResult" {
+            // 次の画面を代入
+            let nextVC = segue.destination as! ResultTableViewController
+            // 値の受け渡し
+            nextVC.receiveQuestionsCount = questionsCount
+            nextVC.receiveResults = correctOrIncorrect
         }
     }
     
