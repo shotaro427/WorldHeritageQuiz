@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     // 問題の答え
     let answers: [Int] = [1, 3, 2]
-    // 現在の問題数を格納する変数
+    // 現在の問題番号を格納する変数
     var questionNumber: Int = 0
     
     override func viewDidLoad() {
@@ -35,8 +35,21 @@ class ViewController: UIViewController {
         if buttonNumber == answers[questionNumber] {
             // アラートの表示
             showAlert(title: "正解です！", message: "次の問題に進みます。")
+            
+            switch questionNumber {
+            case 0:
+                question1.isHidden = true
+            case 1:
+                question2.isHidden = true
+            case 2:
+                question3.isHidden = true
+            default:
+                break
+            }
+            
             // 問題番号を進める
             questionNumber += 1
+            
         } else {
             showAlert(title: "不正解です...", message: "もう一度挑戦しますか？")
         }
