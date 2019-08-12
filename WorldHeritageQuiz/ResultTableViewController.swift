@@ -35,8 +35,6 @@ class ResultTableViewController: UITableViewController {
         } else {
             cell.textLabel?.text = "問題\(indexPath.row + 1)❌"
         }
-        
-
         return cell
     }
 }

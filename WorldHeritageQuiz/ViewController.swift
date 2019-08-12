@@ -115,6 +115,8 @@ class ViewController: UIViewController {
         } else {
             // 結果(tableView)に遷移
             performSegue(withIdentifier: "toResult", sender: nil)
+            // 遷移後に問題状況をリセットする
+            reset()
         }
     }
     
@@ -129,6 +131,23 @@ class ViewController: UIViewController {
             nextVC.receiveQuestionsCount = questionsCount
             nextVC.receiveResults = correctOrIncorrect
         }
+    }
+    
+    // =====================================================
+    // 問題の状況をリセットする関数
+    func reset() {
+        // viewを見えるようにする
+        for i in 0..<questions.count {
+            questions[i].isHidden = false
+        }
+        // ボタンを見えるようにする
+        for j in 0..<answersStackView.arrangedSubviews.count {
+            answersStackView.arrangedSubviews[j].isHidden = false
+        }
+        // 問題番号を初めからにする
+        questionNumber = 1
+        // 正解、不正解を入れる配列を初期化する
+        correctOrIncorrect = []
     }
     
     // =====================================================
