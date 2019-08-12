@@ -159,6 +159,7 @@
                     <navigationItem key="navigationItem" id="yzR-2z-eFC"/>
                     <connections>
                         <outlet property="answersStackView" destination="Ct1-RC-x1q" id="hnM-kK-GGE"/>
+                        <outlet property="titleOfQuestion" destination="yzR-2z-eFC" id="Mu3-GD-ni0"/>
                         <outletCollection property="questions" destination="axK-Mq-TMw" collectionClass="NSMutableArray" id="fpY-HR-GoU"/>
                         <outletCollection property="questions" destination="DaG-5u-yjf" collectionClass="NSMutableArray" id="Z1a-NB-S9z"/>
                         <outletCollection property="questions" destination="nk6-eV-eIa" collectionClass="NSMutableArray" id="WsT-ht-AP1"/>

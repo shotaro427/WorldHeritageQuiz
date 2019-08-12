@@ -10,17 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // 何問目かを表示する
+    @IBOutlet weak var titleOfQuestion: UINavigationItem!
+    // 問1~3までのview
+    @IBOutlet var questions: [UIView]!
+    // スタックビュー（回答ボタン）
+    @IBOutlet weak var answersStackView: UIStackView!
+    
     // 結果を表示する画面に渡す情報群
     // 総問題数
     var questionsCount: Int = 0
     // 正解、不正解を判断する配列(true = 正解、false = 不正解)
     var correctOrIncorrect: [Bool] = []
-    
-    // 問1~3までのview
-    @IBOutlet var questions: [UIView]!
-    
-    // スタックビュー（回答ボタン）
-    @IBOutlet weak var answersStackView: UIStackView!
     
     // 問題の答え
     let answers: [Int] = [1, 3, 2]
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // 総問題数を格納する
         questionsCount = questions.count
+        // 「1問目」と表示させる
+        titleOfQuestion.title = "\(questionNumber)問目"
     }
     
     // =====================================================
@@ -112,6 +115,9 @@ class ViewController: UIViewController {
             hideButton()
             // 問題を次に進める
             questionNumber += 1
+            // タイトルを変更する
+            titleOfQuestion.title = "\(questionNumber)問目"
+            
         } else {
             // 結果(tableView)に遷移
             performSegue(withIdentifier: "toResult", sender: nil)
@@ -148,6 +154,8 @@ class ViewController: UIViewController {
         questionNumber = 1
         // 正解、不正解を入れる配列を初期化する
         correctOrIncorrect = []
+        // navigationTitleを「1問目」に戻す
+        titleOfQuestion.title = "\(questionNumber)番目"
     }
     
     // =====================================================
