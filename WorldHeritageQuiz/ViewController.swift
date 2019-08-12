@@ -9,7 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    // 問1~3までのview
+    @IBOutlet weak var question1: UIView!
+    @IBOutlet weak var question2: UIView!
+    @IBOutlet weak var question3: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
