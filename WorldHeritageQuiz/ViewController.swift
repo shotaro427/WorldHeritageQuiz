@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     // 問1~3までのview
     @IBOutlet var questions: [UIView]!
     
-    
     // スタックビュー（回答ボタン）
     @IBOutlet weak var answersStackView: UIStackView!
     
@@ -30,18 +29,13 @@ class ViewController: UIViewController {
     // 回答を確認する関数
     func checkAnswer(playerAnswer: Int) {
         
-        if questionNumber < answers.count {
-            // 回答があっているか確認
-            if playerAnswer == answers[questionNumber - 1] {
-                
-                showAlertWhenCorrect(title: "正解です！", message: "次の問題へ進みます。")
-                
-            } else {
-                showAlertWhenIncorrect(title: "不正解です...", message: "もう一度挑戦しますか？")
-            }
+        // 回答があっているか確認
+        if playerAnswer == answers[questionNumber - 1] {
+            
+            showAlertWhenCorrect(title: "正解です！", message: "次の問題へ進みます。")
+            
         } else {
-            // 結果(tableView)の画面へ遷移
-            performSegue(withIdentifier: "toResult", sender: nil)
+            showAlertWhenIncorrect(title: "不正解です...", message: "もう一度挑戦しますか？")
         }
     }
     
@@ -55,12 +49,8 @@ class ViewController: UIViewController {
         // アラートのアクション（もう一度の場合）
         let no = UIAlertAction(title: "いいえ", style: .default, handler: {(action: UIAlertAction!) in
             
-            // viewを隠す
-            self.questions[self.questionNumber - 1].isHidden = true
-            // ボタンを１つ減らす
-            self.hideButton()
-            // 問題番号を進める
-            self.questionNumber += 1
+            // 次の問題へ
+            self.nextQuestion()
             
         })
         // 作成したalertに閉じるボタンを追加
@@ -77,12 +67,8 @@ class ViewController: UIViewController {
         // アラートのアクション（ボタン部分の定義）
         let close = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
             
-            // viewを隠す
-            self.questions[self.questionNumber - 1].isHidden = true
-            // ボタンを１つ減らす
-            self.hideButton()
-            // 問題番号を進める
-            self.questionNumber += 1
+            // 次の問題へ
+            self.nextQuestion()
             
         })
         // 作成したalertに閉じるボタンを追加
@@ -104,7 +90,20 @@ class ViewController: UIViewController {
     
     // =====================================================
     //問題を１つ進める関数
-    
+    func nextQuestion() {
+        // questionNumberが問題数を超えないようにする
+        if questionNumber < questions.count  {
+            // viewを隠す
+            questions[questionNumber - 1].isHidden = true
+            // ボタンを減らす
+            hideButton()
+            // 問題を次に進める
+            questionNumber += 1
+        } else {
+            // 結果(tableView)に遷移
+            performSegue(withIdentifier: "toResult", sender: nil)
+        }
+    }
     
     // =====================================================
     // ボタンアクション(ボタンのタグ情報から回答番号を取得 → 答え合わせをする関数に渡す)
