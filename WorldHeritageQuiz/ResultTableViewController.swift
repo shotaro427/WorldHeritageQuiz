@@ -15,27 +15,26 @@ class ResultTableViewController: UITableViewController {
     var receiveQuestionsCount: Int = 0
     // 正解、不正解の配列
     var receiveResults: [Bool] = []
-    
-    // 問題1~3を入れる配列
-    var questions: [String] = []
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(receiveQuestionsCount)
-        print(receiveResults)
     }
     
     // セルの数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // 総問題数分のセルを表示
         return receiveQuestionsCount
     }
 
-    
+    // セルの操作
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
+        
+        if receiveResults[indexPath.row] {
+            cell.textLabel?.text = "問題\(indexPath.row + 1)⭕️"
+        } else {
+            cell.textLabel?.text = "問題\(indexPath.row + 1)❌"
+        }
         
 
         return cell

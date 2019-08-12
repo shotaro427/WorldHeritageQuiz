@@ -60,7 +60,6 @@ class ViewController: UIViewController {
         // アラートのアクション（もう一度の場合）
         let no = UIAlertAction(title: "いいえ", style: .default, handler: {(action: UIAlertAction!) in
             
-            
             // 配列に不正解(false)を入れる
             self.correctOrIncorrect.append(false)
             // 次の問題へ
