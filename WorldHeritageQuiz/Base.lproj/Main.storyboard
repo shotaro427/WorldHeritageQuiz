@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nk6-eV-eIa">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nk6-eV-eIa" userLabel="question3">
                                 <rect key="frame" x="20" y="108" width="374" height="635.5"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWJ-M5-fxa">
@@ -39,7 +39,7 @@
                                     <constraint firstItem="eWJ-M5-fxa" firstAttribute="leading" secondItem="nk6-eV-eIa" secondAttribute="leading" id="pcx-S5-cHn"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-5u-yjf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-5u-yjf" userLabel="question2">
                                 <rect key="frame" x="20" y="108" width="374" height="635.5"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Av-lV-dkA">
@@ -61,7 +61,7 @@
                                     <constraint firstItem="9Av-lV-dkA" firstAttribute="leading" secondItem="DaG-5u-yjf" secondAttribute="leading" id="vt8-Nl-pW9"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axK-Mq-TMw">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axK-Mq-TMw" userLabel="question1">
                                 <rect key="frame" x="20" y="108" width="374" height="635.5"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcR-zj-7aQ">
@@ -159,9 +159,9 @@
                     <navigationItem key="navigationItem" id="yzR-2z-eFC"/>
                     <connections>
                         <outlet property="answersStackView" destination="Ct1-RC-x1q" id="hnM-kK-GGE"/>
-                        <outlet property="question1" destination="axK-Mq-TMw" id="XJa-SM-SbF"/>
-                        <outlet property="question2" destination="DaG-5u-yjf" id="BaL-Q2-U87"/>
-                        <outlet property="question3" destination="nk6-eV-eIa" id="ZKs-3t-zKT"/>
+                        <outletCollection property="questions" destination="axK-Mq-TMw" collectionClass="NSMutableArray" id="fpY-HR-GoU"/>
+                        <outletCollection property="questions" destination="DaG-5u-yjf" collectionClass="NSMutableArray" id="Z1a-NB-S9z"/>
+                        <outletCollection property="questions" destination="nk6-eV-eIa" collectionClass="NSMutableArray" id="WsT-ht-AP1"/>
                         <segue destination="zRM-oG-WCy" kind="show" identifier="toResult" id="BxP-S1-Mjy"/>
                     </connections>
                 </viewController>
@@ -169,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="114.50892857142857"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Result Table View Controller-->
         <scene sceneID="hIZ-QR-fT0">
             <objects>
-                <tableViewController id="zRM-oG-WCy" sceneMemberID="viewController">
+                <tableViewController id="zRM-oG-WCy" customClass="ResultTableViewController" customModule="WorldHeritageQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wUS-U2-qmC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
