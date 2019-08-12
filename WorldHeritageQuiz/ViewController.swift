@@ -40,17 +40,27 @@ class ViewController: UIViewController {
     // 回答を確認する関数
     func checkAnswer(playerAnswer: Int) {
         
+        
         // 回答があっているか確認
         if playerAnswer == answers[questionNumber - 1] {
-            // 配列に不正解(true)を入れる
-            correctOrIncorrect.append(true)
-            // アラートを表示
-            showAlertWhenCorrect(title: "正解です！", message: "次の問題へ進みます。")
-            
+            if questionNumber != questions.count {
+                // 配列に不正解(true)を入れる
+                correctOrIncorrect.append(true)
+                // アラートを表示
+                showAlertWhenCorrect(title: "正解です！", message: "次の問題へ進みます。")
+            } else {
+                // 問題を出し終わった時の処理
+                // 配列に不正解(true)を入れる
+                correctOrIncorrect.append(true)
+                // アラートを表示
+                showAlertWhenCorrect(title: "正解です！", message: "結果を表示します。")
+            }
+                
         } else {
             // アラートを表示
             showAlertWhenIncorrect(title: "不正解です...", message: "もう一度挑戦しますか？")
         }
+        
     }
     
     // =====================================================
@@ -117,7 +127,6 @@ class ViewController: UIViewController {
             questionNumber += 1
             // タイトルを変更する
             titleOfQuestion.title = "\(questionNumber)問目"
-            
         } else {
             // 結果(tableView)に遷移
             performSegue(withIdentifier: "toResult", sender: nil)
@@ -143,12 +152,12 @@ class ViewController: UIViewController {
     // 問題の状況をリセットする関数
     func reset() {
         // viewを見えるようにする
-        for i in 0..<questions.count {
-            questions[i].isHidden = false
+        for question in questions {
+            question.isHidden = false
         }
         // ボタンを見えるようにする
-        for j in 0..<answersStackView.arrangedSubviews.count {
-            answersStackView.arrangedSubviews[j].isHidden = false
+        for button in answersStackView.arrangedSubviews {
+            button.isHidden = false
         }
         // 問題番号を初めからにする
         questionNumber = 1
