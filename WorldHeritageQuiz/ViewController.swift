@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     // 問題の答え
     let answers: [Int] = [1, 3, 2]
     // 現在の問題番号を格納する変数
-    var questionNumber: Int = 0
+    var questionNumber: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,21 +32,28 @@ class ViewController: UIViewController {
     func checkAnswer(buttonNumber: Int) {
         
         // 回答があっているか確認
-        if buttonNumber == answers[questionNumber] {
+        if buttonNumber == answers[questionNumber - 1] {
             // アラートの表示
             showAlert(title: "正解です！", message: "次の問題に進みます。")
             
             switch questionNumber {
-            case 0:
-                question1.isHidden = true
             case 1:
-                question2.isHidden = true
+                // 問題1を隠す
+                question1.isHidden = true
+                
+                
             case 2:
+                // 問題2を隠す
+                question2.isHidden = true
+            case 3:
+                // 問題3を隠す
                 question3.isHidden = true
             default:
                 break
             }
             
+            // ボタンを１つ減らす
+            hideButton()
             // 問題番号を進める
             questionNumber += 1
             
@@ -66,6 +73,18 @@ class ViewController: UIViewController {
         alert.addAction(close)
         // アラートを表示する
         present(alert, animated: true, completion: nil)
+    }
+    
+    // =====================================================
+    // ボタンを1つ減らす処理
+    func hideButton() {
+        // スタックビュー内のボタンの数を取得
+        let sumOfButton: Int = answersStackView.arrangedSubviews.count
+        // どのボタンを消すかを決める
+        let hideButtonNumber: Int = sumOfButton - questionNumber
+        
+        // {(スタックビューの要素数) - (問題番号)}番目のボタンを隠す
+        answersStackView.arrangedSubviews[hideButtonNumber].isHidden = true
     }
     
     // =====================================================
