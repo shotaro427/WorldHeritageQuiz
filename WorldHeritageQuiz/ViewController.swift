@@ -36,6 +36,18 @@ class ViewController: UIViewController {
         titleOfQuestion.title = "\(questionNumber)問目"
     }
     
+    // 問題から結果の画面へ遷移したタイミングの処理
+    override func viewWillDisappear(_ animated: Bool) {
+        // タイトルの変更
+        titleOfQuestion.title = "問題"
+    }
+    
+    // 結果の画面から問題の画面に戻ってきた時の処理
+    override func viewWillAppear(_ animated: Bool) {
+        // navigationTitleを「1問目」に戻す
+        titleOfQuestion.title = "\(questionNumber)番目"
+    }
+    
     // =====================================================
     // 回答を確認する関数
     func checkAnswer(playerAnswer: Int) {
@@ -163,8 +175,6 @@ class ViewController: UIViewController {
         questionNumber = 1
         // 正解、不正解を入れる配列を初期化する
         correctOrIncorrect = []
-        // navigationTitleを「1問目」に戻す
-        titleOfQuestion.title = "\(questionNumber)番目"
     }
     
     // =====================================================
