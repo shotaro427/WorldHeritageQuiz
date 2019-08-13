@@ -29,7 +29,7 @@ class ResultTableViewController: UITableViewController {
     // セルの操作
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        // trueなら丸をfalseならバツをつける
         if receiveResults[indexPath.row] {
             cell.textLabel?.text = "問題\(indexPath.row + 1)⭕️"
         } else {

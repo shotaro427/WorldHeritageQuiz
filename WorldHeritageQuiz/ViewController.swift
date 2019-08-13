@@ -25,14 +25,14 @@ class ViewController: UIViewController {
     ]
     // 問題の答え
     let answers: [Int] = [1, 3, 2]
+    // 現在の問題番号を格納する変数
+    var questionNumber: Int = 1
     
     // 結果を表示する画面に渡す情報群
     // 総問題数
     var questionsCount: Int = 0
     // 正解、不正解を判断する配列(true = 正解、false = 不正解)
     var correctOrIncorrect: [Bool] = []
-    // 現在の問題番号を格納する変数
-    var questionNumber: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,13 +84,12 @@ class ViewController: UIViewController {
         let yes = UIAlertAction(title: "はい", style: .default, handler: nil)
         // アラートのアクション（もう一度の場合）
         let no = UIAlertAction(title: "いいえ", style: .default, handler: {(action: UIAlertAction!) in
-            
             // 配列に不正解(false)を入れる
             self.correctOrIncorrect.append(false)
             // 次の問題へ
             self.nextQuestion()
         })
-        // 作成したalertに閉じるボタンを追加
+        // 作成したalertにボタンを追加
         alert.addAction(yes)
         alert.addAction(no)
         // アラートを表示する
@@ -104,12 +103,10 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle:  .alert)
         // アラートのアクション（ボタン部分の定義）
         let close = UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
-            
             // 次の問題へ
             self.nextQuestion()
-            
         })
-        // 作成したalertに閉じるボタンを追加
+        // 作成したalertにボタンを追加
         alert.addAction(close)
         // アラートを表示する
         present(alert, animated: true, completion: nil)
@@ -133,7 +130,7 @@ class ViewController: UIViewController {
         if questionNumber < questions.count  {
             // ボタンを減らす
             hideButton()
-            // 問題を次に進める
+            // 問題番号を次に進める
             questionNumber += 1
             // 次の問題を表示する
             questionTextView.text = questions[questionNumber - 1]
