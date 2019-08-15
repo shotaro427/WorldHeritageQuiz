@@ -11,8 +11,6 @@ import UIKit
 class ResultTableViewController: UITableViewController {
     
     // 遷移元から受け取る情報
-    // 総問題数
-    var receiveQuestionsCount: Int = 0
     // 正解、不正解の配列
     var receiveResults: [Bool] = []
 
@@ -23,7 +21,7 @@ class ResultTableViewController: UITableViewController {
     // セルの数
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 総問題数分のセルを表示
-        return receiveQuestionsCount
+        return receiveResults.count
     }
 
     // セルの操作
